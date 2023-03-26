@@ -3,6 +3,14 @@
  * Form login.
  */
 
+session_start();
+
+$error_message = '';
+
+if (!empty($_COOKIE['error'])) {
+    $error_message = $_COOKIE['error'];
+}
+
 ?>
 <!doctype html>
 <html lang="`en`">
@@ -21,8 +29,32 @@
         <div class="col">
 
         </div>
-        <div class="col">
-            
+        <div class="col gy-5">
+            <?php if (!empty($error_message)) { ?>
+                <div class="alert alert-danger" role="alert">
+                    <?php echo $error_message; ?>
+                </div>
+            <?php } ?>
+            <form method="post" action="/dz_4/from_handler.php">
+                <div class="mb-3">
+                    <label for="email-user" class="form-label">Email address</label>
+                    <input type="email" name="email" class="form-control" id="email-user"
+                           placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="password-user" class="form-label">Password</label>
+                    <input type="password" name="pswd" class="form-control" id="password-user">
+                </div>
+                <div class="mb-3">
+                    <input class="form-check-input" type="checkbox" value="yes" id="remember-my">
+                    <label class="form-check-label" for="remember-my">
+                        Remember me
+                    </label>
+                </div>
+                <div class="mb-3">
+                    <input type="submit" class="btn btn-primary mb-3" value="Login">
+                </div>
+            </form>
         </div>
         <div class="col">
 
